@@ -2,12 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import {BrowserRouter} from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 
+const app = (
+    <BrowserRouter>
+        <React.StrictMode>
+            <App />
+        </React.StrictMode>
+    </BrowserRouter>
+)
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  app,
   document.getElementById('root')
 );
 
