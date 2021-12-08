@@ -4,9 +4,14 @@ import QuizList from "./containers/QuizList/QuizList";
 import Auth from "./containers/Auth/Auth";
 import QuizCreator from "./containers/QuizCreator/QuizCreator";
 import SubQuiz from "./containers/Quiz/WrapperForUseParams";
+//import Quiz from "./containers/Quiz/Quiz";
+import Quiz from "./containers/Quiz/functionQuizComponent";
 
 
 function App() {
+    // const params = useParams();
+    // const quizId = params.id;
+    // console.log(quizId)
   return (
     <Layout>
         <Routes>
