@@ -5,7 +5,7 @@ import {
     FETCH_QUIZES_START,
     FETCH_QUIZES_SUCCESS,
     QUIZ_SET_STATE,
-    FINISH_QUIZ, QUIZ_NEXT_QUESTION
+    FINISH_QUIZ, QUIZ_NEXT_QUESTION, QUIZ_RETRY
 } from "./actionTypes";
 
 export function fetchQuizes() {
@@ -55,7 +55,7 @@ export function fetchQuizById(quizId) {
         dispatch(fetchQuizesStart())
 
         try {
-            console.log(quizId)
+
             const response = await axios.get(`/quizes/${quizId}.json`) //this.props.match.params.id
             const quiz = response.data
             dispatch(fetchQuizSuccess(quiz))
@@ -66,30 +66,9 @@ export function fetchQuizById(quizId) {
     }
 }
 
-// export function fetchQuizes() {
-//     return async dispatch => {
-//         dispatch(fetchQuizesStart())
-//
-//         try {
-//             const response = await axios.get('/quizes.json')
-//             const quizes = []
-//
-//             Object.keys(response.data).forEach((key, index) => {
-//                 quizes.push({
-//                     id: key,
-//                     name: `Test №${index + 1}`
-//                 })
-//             })
-//             dispatch (fetchQuizesSuccess(quizes))
-//         }catch (e) {
-//             dispatch(fetchQuizesError)
-//
-//         }
-//     }
-// }
 
 export  function fetchQuizSuccess(quiz) {
-    console.log(quiz)
+
     return {
         type: FETCH_QUIZ_SUCCESS,
         quiz
@@ -116,7 +95,7 @@ export function quizNextQuestion(number) {
     }
 }
 
-export function isQuizFinished(state) {
+function isQuizFinished(state) {
     return state.activeQuestion + 1 === state.quiz.length
 }
 
@@ -161,5 +140,11 @@ export function quizAnswerClick(answerId) {
     }
 }
 
+
+export function retryQuiz() {
+    return {
+        type: QUIZ_RETRY
+    }
+}
 
 

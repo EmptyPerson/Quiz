@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import './Quiz.css'
 import ActiveQuiz from '../../companents/ActiveQuiz/ActiveQuiz'
 import FinishedQuiz from "../../companents/FinishedQuiz/FinishedQuiz";

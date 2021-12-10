@@ -4,19 +4,11 @@ import ActiveQuiz from '../../companents/ActiveQuiz/ActiveQuiz'
 import FinishedQuiz from "../../companents/FinishedQuiz/FinishedQuiz";
 import Loader from "../../companents/UI/loader/loader";
 import {connect} from "react-redux";
-import {fetchQuizById} from "../../store/actions/quiz";
+import {fetchQuizById, quizAnswerClick, retryQuiz} from "../../store/actions/quiz";
 
 
 class Quiz extends Component {
 
-    retryHandler = () => {
-        this.setState({
-            activeQuestion: 0,
-            isFinished: false,
-            answerState: null,
-            results: {}
-        })
-    }
 
     onAnswerClickHandler = (answerId) => {
         if (this.state.answerState) {
@@ -60,8 +52,12 @@ class Quiz extends Component {
 
     }
 
+    componentWillUnmount() {
+        this.props.retryQuiz()
+    }
+
     async componentDidMount() {
-        console.log(this.props)
+
         this.props.fetchQuizById(this.props.match)
     }
 
@@ -78,12 +74,12 @@ class Quiz extends Component {
                     : this.props.isFinished ? <FinishedQuiz
                                 results={this.props.results}
                                 quiz={this.props.quiz}
-                                onRetry={this.retryHandler}
+                                onRetry={this.props.retryQuiz}
                             />
                             : <ActiveQuiz
                                 answers={this.props.quiz[this.props.activeQuestion].answers}
                                 question={this.props.quiz[this.props.activeQuestion].question}
-                                onAnswerClick={this.onAnswerClickHandler}
+                                onAnswerClick={this.props.quizAnswerClick}
                                 quizLength={this.props.quiz.length}
                                 answerNumber={this.props.activeQuestion + 1}
                                 state={this.props.answerState}
@@ -111,8 +107,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 
     return{
-        fetchQuizById: id => dispatch(fetchQuizById(id))
-
+        fetchQuizById: id => dispatch(fetchQuizById(id)),
+        quizAnswerClick: answerId => dispatch(quizAnswerClick(answerId)),
+        retryQuiz: () => dispatch(retryQuiz())
     }
 }
 
