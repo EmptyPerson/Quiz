@@ -5,7 +5,6 @@ import {createControl, validate, validateForm} from "../../form/formFramework";
 import Input from "../../companents/UI/Input/Input";
 import Auxiliary from "../../hoc/Auxiliary/Auxiliary";
 import Select from "../../companents/UI/Select/Select"
-import axios from '../../axios/axios-quiz';
 import {connect} from "react-redux";
 import {createQuizQuestion, finishCreateQuiz} from "../../store/actions/create";
 

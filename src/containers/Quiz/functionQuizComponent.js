@@ -62,8 +62,6 @@ const Quiz = (props) => {
     }
 
     useEffect( () => {
-
-        console.log(props)
         props.fetchQuizById(quizId)
     }, [quizId])
 
